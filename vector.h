@@ -22,8 +22,8 @@ class Vector : public std::vector<T, Allocator> {
 
   template <class InputIterator>
   Vector(InputIterator first,
-             InputIterator last,
-             const Allocator& allocator = Allocator())
+         InputIterator last,
+         const Allocator& allocator = Allocator())
       : base_type(first, last, allocator) { }
 
   Vector(const Vector<T, Allocator>& x) : base_type(x) { }
