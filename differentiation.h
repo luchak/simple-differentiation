@@ -120,7 +120,7 @@ class DifferentiationContext {
   DifferentiationContext(int num_vars)
       : num_vars_(num_vars), original_values_(num_vars) { }
 
-  DifferentiationVariable<T, V> MakeVariable(int index, const T& value) const;
+  DifferentiationVariable<T, V> MakeVariable(int index, const T& value);
 
   const T& original_value(int index) const { return original_values_[index]; }
   const int size() const { return num_vars_; }
@@ -135,7 +135,8 @@ class DifferentiationContext {
 
 template <class T, class V>
 DifferentiationVariable<T, V> DifferentiationContext<T, V>::MakeVariable(
-    int index, const T& value) const {
+    int index, const T& value) {
+  original_values_[index] = value;
   return DifferentiationVariable<T, V>(index, value, *this);
 }
 
