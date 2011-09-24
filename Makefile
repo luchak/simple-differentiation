@@ -4,7 +4,7 @@ test: differentiation_test
 	./differentiation_test
 
 differentiation_test: differentiation_test.cc differentiation.h vector.h
-	$(CXX) $(CXXFLAGS) -lgtest $^ -o $@
+	$(CXX) $(CXXFLAGS) -lgtest $< -o $@
 
 clean:
 	rm -f differentiation_test
