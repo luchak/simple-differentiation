@@ -1,7 +1,7 @@
 #ifndef DIFFERENTIATION_H_
 #define DIFFERENTIATION_H_
 
-#include "math_vector.h"
+#include "vector.h"
 
 namespace simple_differentiation {
 
@@ -33,7 +33,7 @@ DifferentiationVariable<T, V> exp(const DifferentiationVariable<T, V>& x);
 template <class T, class V>
 DifferentiationVariable<T, V> log(const DifferentiationVariable<T, V>& x);
 
-template <class T, class V = MathVector<T> >
+template <class T, class V = Vector<T> >
 class DifferentiationVariable {
  public:
   friend class DifferentiationContext<T, V>;
@@ -114,7 +114,7 @@ class DifferentiationVariable {
   V gradient_;
 };
 
-template <class T, class V = MathVector<T> >
+template <class T, class V = Vector<T> >
 class DifferentiationContext {
  public:
   DifferentiationContext(int num_vars)
