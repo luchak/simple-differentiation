@@ -1,1 +1,3 @@
 Simple automatic differentiation in a header file.
+
+Still a work in progress, usage here when I finish basic trig / log / exp / pow etc. Arithmetic should work if you just comment out the broken stuff.
