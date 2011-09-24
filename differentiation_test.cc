@@ -7,7 +7,7 @@
 
 namespace {
 
-TEST(VectorTest, VectorCreation) {
+TEST(VectorTest, Create) {
   simple_differentiation::Vector<double> vec0;
   EXPECT_EQ(0, vec0.size());
 
@@ -40,7 +40,7 @@ TEST(VectorTest, VectorCreation) {
   EXPECT_EQ(src[1], dst[1]);
 }
 
-TEST(VectorTest, VectorNegation) {
+TEST(VectorTest, Negate) {
   simple_differentiation::Vector<double> vec0(0);
   EXPECT_EQ(0, (-vec0).size());
 
@@ -55,7 +55,7 @@ TEST(VectorTest, VectorNegation) {
   EXPECT_EQ(-0.5, (-vec1)[1]);
 }
 
-TEST(VectorTest, VectorAddAssignment) {
+TEST(VectorTest, AddAssign) {
   simple_differentiation::Vector<double> vec_a;
   vec_a.push_back(1.0);
   vec_a.push_back(2.0);
@@ -73,7 +73,7 @@ TEST(VectorTest, VectorAddAssignment) {
   EXPECT_EQ(vec_a[1], vec_a_copy[1]);
 }
 
-TEST(VectorTest, VectorAddition) {
+TEST(VectorTest, Add) {
   simple_differentiation::Vector<double> vec_a;
   vec_a.push_back(1.0);
   vec_a.push_back(2.0);
@@ -87,7 +87,7 @@ TEST(VectorTest, VectorAddition) {
   EXPECT_EQ(1.0, vec_c[1]);
 }
 
-TEST(VectorTest, VectorSubtractAssignment) {
+TEST(VectorTest, SubtractAssign) {
   simple_differentiation::Vector<double> vec_a;
   vec_a.push_back(1.0);
   vec_a.push_back(2.0);
@@ -105,7 +105,7 @@ TEST(VectorTest, VectorSubtractAssignment) {
   EXPECT_EQ(vec_a[1], vec_a_copy[1]);
 }
 
-TEST(VectorTest, VectorSubtraction) {
+TEST(VectorTest, Subtract) {
   simple_differentiation::Vector<double> vec_a;
   vec_a.push_back(1.0);
   vec_a.push_back(2.0);
@@ -119,7 +119,7 @@ TEST(VectorTest, VectorSubtraction) {
   EXPECT_EQ(3.0, vec_c[1]);
 }
 
-TEST(VectorTest, VectorMultiplyAssignment) {
+TEST(VectorTest, MultiplyAssign) {
   simple_differentiation::Vector<double> vec;
   vec.push_back(1.0);
   vec.push_back(2.0);
@@ -142,7 +142,7 @@ TEST(VectorTest, VectorMultiplyAssignment) {
   EXPECT_EQ(4.0, vec[1]);
 }
 
-TEST(VectorTest, VectorMultiplication) {
+TEST(VectorTest, Multiply) {
   simple_differentiation::Vector<double> vec;
   vec.push_back(1.0);
   vec.push_back(2.0);
@@ -168,7 +168,7 @@ TEST(VectorTest, VectorMultiplication) {
   EXPECT_EQ(10.0, vec_mult[1]);
 }
 
-TEST(VectorTest, VectorDivideAssignment) {
+TEST(VectorTest, DivideAssign) {
   simple_differentiation::Vector<double> vec;
   vec.push_back(60.0);
   vec.push_back(120.0);
@@ -191,7 +191,7 @@ TEST(VectorTest, VectorDivideAssignment) {
   EXPECT_EQ(60.0, vec[1]);
 }
 
-TEST(VectorTest, VectorDivision) {
+TEST(VectorTest, Divide) {
   simple_differentiation::Vector<double> vec;
   vec.push_back(60.0);
   vec.push_back(120.0);
