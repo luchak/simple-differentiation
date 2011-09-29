@@ -207,6 +207,90 @@ TEST(VectorTest, Divide) {
   EXPECT_EQ(60.0, vec_div[1]);
 }
 
+TEST(DifferentiationTest, ContextSize) {
+  simple_differentiation::DifferentiationContext<double> context(1);
+  EXPECT_EQ(1, context.size());
+
+  simple_differentiation::DifferentiationContext<double> another_context(5);
+  EXPECT_EQ(5, another_context.size());
+}
+
+TEST(DifferentiationTest, MakeVariable) {
+  simple_differentiation::DifferentiationContext<double> context(2);
+
+  simple_differentiation::DifferentiationVariable<double> x =
+      context.MakeVariable(0, 1.0); 
+  EXPECT_EQ(1.0, x.value());
+  EXPECT_EQ(2, x.gradient().size());
+  EXPECT_EQ(1.0, x.gradient()[0]);
+  EXPECT_EQ(0.0, x.gradient()[1]);
+
+  simple_differentiation::DifferentiationVariable<double> y =
+      context.MakeVariable(1, 2.0); 
+  EXPECT_EQ(2.0, y.value());
+  EXPECT_EQ(2, y.gradient().size());
+  EXPECT_EQ(0.0, y.gradient()[0]);
+  EXPECT_EQ(1.0, y.gradient()[1]);
+}
+
+TEST(DifferentiationTest, OriginalValues) {
+  simple_differentiation::DifferentiationContext<double> context(2);
+
+  simple_differentiation::DifferentiationVariable<double> x =
+      context.MakeVariable(0, 1.0); 
+  EXPECT_EQ(1.0, context.original_value(0));
+
+  simple_differentiation::DifferentiationVariable<double> y =
+      context.MakeVariable(1, 2.0); 
+  EXPECT_EQ(1.0, context.original_value(0));
+  EXPECT_EQ(2.0, context.original_value(1));
+
+  x += 5;
+  EXPECT_EQ(1.0, context.original_value(0));
+
+  y += x;
+  EXPECT_EQ(1.0, context.original_value(0));
+  EXPECT_EQ(2.0, context.original_value(1));
+}
+
+TEST(DifferentiationTest, CopyAndAssignVariable) {
+  simple_differentiation::DifferentiationContext<double> context(2);
+
+  simple_differentiation::DifferentiationVariable<double> x =
+      context.MakeVariable(0, 1.0); 
+  simple_differentiation::DifferentiationVariable<double> y =
+      context.MakeVariable(1, 2.0); 
+
+  simple_differentiation::DifferentiationVariable<double> z(x);
+  EXPECT_EQ(x.value(), z.value());
+  EXPECT_EQ(x.gradient().size(), z.gradient().size());
+  EXPECT_EQ(x.gradient()[0], z.gradient()[0]);
+  EXPECT_EQ(x.gradient()[1], z.gradient()[1]);
+
+  z = y;
+  EXPECT_EQ(y.value(), z.value());
+  EXPECT_EQ(y.gradient().size(), z.gradient().size());
+  EXPECT_EQ(y.gradient()[0], z.gradient()[0]);
+  EXPECT_EQ(y.gradient()[1], z.gradient()[1]);
+
+  z = z;
+  EXPECT_EQ(y.value(), z.value());
+  EXPECT_EQ(y.gradient().size(), z.gradient().size());
+  EXPECT_EQ(y.gradient()[0], z.gradient()[0]);
+  EXPECT_EQ(y.gradient()[1], z.gradient()[1]);
+}
+
+TEST(DifferentiationTest, Add) {
+  simple_differentiation::DifferentiationContext<double> context(2);
+
+  simple_differentiation::DifferentiationVariable<double> x =
+      context.MakeVariable(0, 1.0); 
+  simple_differentiation::DifferentiationVariable<double> y =
+      context.MakeVariable(1, 2.0); 
+  
+  simple_differentiation::DifferentiationVariable<double> z = (x += y);
+}
+
 }  // namespace
 
 int main(int argc, char* argv[]) {
